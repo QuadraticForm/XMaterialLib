@@ -576,7 +576,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "XCrystalLightingModel",
+    "m_Name": "XCrystalModel_legacy",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
