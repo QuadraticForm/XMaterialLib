@@ -897,7 +897,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "AddAdditionalLights (Custom Function)",
+    "m_Name": "XAddAddlLights (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -952,7 +952,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "AddAdditionalLights",
+    "m_FunctionName": "XAddAddlLights",
     "m_FunctionSource": "e01046a3427821445bdaf8c3f7105d2e",
     "m_FunctionBody": "Enter function body here..."
 }

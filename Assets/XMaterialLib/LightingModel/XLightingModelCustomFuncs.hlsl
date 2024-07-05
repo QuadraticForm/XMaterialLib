@@ -4,7 +4,7 @@
 #ifndef SHADERGRAPH_PREVIEW
 
 // This function gets additional light data and calculates realtime shadows
-Light GetAdditionalLightCustom(int pixelLightIndex, float3 worldPosition) {
+Light XGetAddlLight(int pixelLightIndex, float3 worldPosition) {
     // Convert the pixel light index to the light data index
     #if USE_FORWARD_PLUS
         int lightIndex = pixelLightIndex;
@@ -18,9 +18,16 @@ Light GetAdditionalLightCustom(int pixelLightIndex, float3 worldPosition) {
     return light;
 }
 
+half3 XSpecular(half NDotL, half3 lightDir, half3 normal, half3 viewDir, half smoothness)
+{
+	float3 halfVec = SafeNormalize(float3(lightDir) + float3(viewDir));
+	half NdotH = saturate(dot(normal, halfVec));
+	return pow(NdotH, smoothness) * NDotL;
+}
+
 #endif
 
-void _AddAdditionalLights_float(float Smoothness, float3 WorldPosition, float3 WorldNormal, float3 WorldView,
+void XAddAddlLights_float(float Smoothness, float3 WorldPosition, float3 WorldNormal, float3 WorldView,
     float MainDiffuse, float3 MainSpecular, float3 MainColor,
     out float Diffuse, out float3 Specular, out float3 Color) {
 
@@ -41,11 +48,12 @@ void _AddAdditionalLights_float(float Smoothness, float3 WorldPosition, float3 W
 #endif
 
     LIGHT_LOOP_BEGIN(pixelLightCount)
-        Light light = GetAdditionalLightCustom(lightIndex, WorldPosition);
+        Light light = XGetAddlLight(lightIndex, WorldPosition);
         float NdotL = saturate(dot(WorldNormal, light.direction));
         float atten = light.distanceAttenuation * light.shadowAttenuation;
         float thisDiffuse = atten * NdotL;
-        float3 thisSpecular = LightingSpecular(thisDiffuse, light.direction, WorldNormal, WorldView, 1, Smoothness);
+	float3 thisSpecular = 0;
+	//XSpecular(thisDiffuse, light.direction, WorldNormal, WorldView, 1, Smoothness);
         Diffuse += thisDiffuse;
         Specular += thisSpecular;
         #if defined(_LIGHT_COOKIES)
@@ -59,7 +67,7 @@ void _AddAdditionalLights_float(float Smoothness, float3 WorldPosition, float3 W
 #endif
 }
 
-void _AddAdditionalLights_half(half Smoothness, half3 WorldPosition, half3 WorldNormal, half3 WorldView,
+void XAddAddlLights_half(half Smoothness, half3 WorldPosition, half3 WorldNormal, half3 WorldView,
     half MainDiffuse, half3 MainSpecular, half3 MainColor,
     out half Diffuse, out half3 Specular, out half3 Color) {
 
@@ -80,11 +88,12 @@ void _AddAdditionalLights_half(half Smoothness, half3 WorldPosition, half3 World
 #endif
 
     LIGHT_LOOP_BEGIN(pixelLightCount)
-        Light light = GetAdditionalLightCustom(lightIndex, WorldPosition);
+        Light light = XGetAddlLight(lightIndex, WorldPosition);
         half NdotL = saturate(dot(WorldNormal, light.direction));
         half atten = light.distanceAttenuation * light.shadowAttenuation;
         half thisDiffuse = atten * NdotL;
-        half3 thisSpecular = LightingSpecular(thisDiffuse * light.color, light.direction, WorldNormal, WorldView, 1, Smoothness);
+	half3 thisSpecular = 0;
+	//XSpecular(thisDiffuse * light.color, light.direction, WorldNormal, WorldView, 1, Smoothness);
         Diffuse += thisDiffuse;
         Specular += thisSpecular;
         #if defined(_LIGHT_COOKIES)
@@ -99,26 +108,26 @@ void _AddAdditionalLights_half(half Smoothness, half3 WorldPosition, half3 World
 #endif
 }
 
-void ExtLitModel_float(
+void XExtLitModel_float(
     float3 BaseColor, float3 DiffuseColor, float3 F0, float Smoothness,
     float3 WorldPos, float3 WorldNormal, float3 WorldView,
     float3 LightDir, float3 LightColor, float LightAtten,
     out float3 Result)
 {
     // TODO, make this PBR
-    float NDotL = saturate(dot(WorldNormal, LightDir));
-    float3 diffuse = NDotL * DiffuseColor;
-    Result = 0;
+	float NDotL = saturate(dot(WorldNormal, LightDir));
+	float3 diffuse = NDotL * DiffuseColor;
+	Result = 0;
     
 #ifndef SHADERGRAPH_PREVIEW
     // TODO, make this PBR
-    float3 specular = F0 * LightingSpecular(NDotL, LightDir, WorldNormal, WorldView, F0, Smoothness);
+	float3 specular = F0 * XSpecular(NDotL, LightDir, WorldNormal, WorldView, Smoothness);
     
-    Result = (diffuse + specular) * LightColor * LightAtten;
+	Result = (diffuse + specular) * LightColor * LightAtten;
 #endif
 }
 
-void ExtLitModel_half(
+void XExtLitModel_half(
     half3 BaseColor, half3 DiffuseColor, half3 F0, half Smoothness,
     half3 WorldPos, half3 WorldNormal, half3 WorldView,
     half3 LightDir, half3 LightColor, half LightAtten,
@@ -131,7 +140,7 @@ void ExtLitModel_half(
     
 #ifndef SHADERGRAPH_PREVIEW
     // TODO, make this PBR
-    half3 specular = F0 * LightingSpecular(NDotL, LightDir, WorldNormal, WorldView, F0, Smoothness);
+    half3 specular = F0 * XSpecular(NDotL, LightDir, WorldNormal, WorldView, Smoothness);
     
     Result = (diffuse + specular) * LightColor * LightAtten;
 #endif
