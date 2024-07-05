@@ -441,10 +441,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "0d3f3568807c4131834aa5a3e9946f8d",
     "m_Id": 18704834,
-    "m_DisplayName": "Diffuse",
+    "m_DisplayName": "DiffuseColor",
     "m_SlotType": 0,
     "m_Hidden": false,
-    "m_ShaderOutputName": "_Diffuse",
+    "m_ShaderOutputName": "_DiffuseColor",
     "m_StageCapability": 3,
     "m_Value": {
         "x": 0.5,
@@ -1014,9 +1014,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1106.0,
-            "y": -1660.0001220703125,
-            "width": 129.5001220703125,
+            "x": -1165.4998779296875,
+            "y": -1490.4998779296875,
+            "width": 129.5,
             "height": 142.0
         }
     },
@@ -1389,9 +1389,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1287.9998779296875,
-            "y": -1650.5001220703125,
-            "width": 133.4998779296875,
+            "x": -1347.4998779296875,
+            "y": -1480.9998779296875,
+            "width": 133.5,
             "height": 34.0
         }
     },
@@ -1692,8 +1692,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1302.5,
-            "y": -1435.5001220703125,
+            "x": -1174.9998779296875,
+            "y": -1548.9998779296875,
             "width": 133.5,
             "height": 34.0
         }
@@ -1984,8 +1984,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1270.0,
-            "y": -1552.0001220703125,
+            "x": -1329.4998779296875,
+            "y": -1382.4998779296875,
             "width": 115.5,
             "height": 34.0
         }
