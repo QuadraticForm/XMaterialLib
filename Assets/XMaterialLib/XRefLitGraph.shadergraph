@@ -914,7 +914,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -513.5,
-            "y": 513.0,
+            "y": 547.0,
             "width": 164.5,
             "height": 34.0
         }
@@ -1162,7 +1162,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -553.0,
-            "y": 479.0,
+            "y": 513.0,
             "width": 204.0,
             "height": 34.0
         }
@@ -1464,9 +1464,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -519.9999389648438,
-            "y": 550.9999389648438,
-            "width": 170.99993896484376,
+            "x": -520.0,
+            "y": 585.0,
+            "width": 171.0,
             "height": 34.0
         }
     },
@@ -1501,8 +1501,8 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -561.0,
-            "y": 585.0,
-            "width": 211.99996948242188,
+            "y": 479.0,
+            "width": 212.0,
             "height": 34.0
         }
     },
@@ -1638,6 +1638,9 @@
             "m_Id": "63f570b9a2b74096af0cdb9b99aca78e"
         },
         {
+            "m_Id": "f4bce222df1649e98a88555cb2e71cdd"
+        },
+        {
             "m_Id": "850620b7d02544808b83a08ede5a344c"
         },
         {
@@ -1645,9 +1648,6 @@
         },
         {
             "m_Id": "c0c0903a191c4a4594bff1c57a2cdfc7"
-        },
-        {
-            "m_Id": "f4bce222df1649e98a88555cb2e71cdd"
         },
         {
             "m_Id": "5cc71f5428964520a75b0118b4af57e0"
@@ -1703,10 +1703,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "f4bce222df1649e98a88555cb2e71cdd",
     "m_Id": -1889916367,
-    "m_DisplayName": "Refraction Roughness",
+    "m_DisplayName": "Transmission Smoothness",
     "m_SlotType": 0,
     "m_Hidden": false,
-    "m_ShaderOutputName": "_Refraction_Roughness",
+    "m_ShaderOutputName": "_Transmission_Smoothness",
     "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,

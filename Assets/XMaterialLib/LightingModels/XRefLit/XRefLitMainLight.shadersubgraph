@@ -16,9 +16,6 @@
             "m_Id": "8e57c2e6e8f34fb8a2b797728d5f37f1"
         },
         {
-            "m_Id": "9a3d53dde03b44cd839038d8fa99a133"
-        },
-        {
             "m_Id": "1ceba08207d04cf5b328dd9843be6a2c"
         }
     ],
@@ -929,34 +926,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "9a3d53dde03b44cd839038d8fa99a133",
-    "m_Guid": {
-        "m_GuidSerialized": "68f0d377-a882-48b3-b86c-5b5bf531f02e"
-    },
-    "m_Name": "Metallic",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Metallic",
-    "m_DefaultReferenceName": "_Metallic",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": 0.0,
-    "m_FloatType": 0,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
-    }
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a136cfbb471140788d9aa4ae50e5c817",
@@ -1220,9 +1189,6 @@
         },
         {
             "m_Id": "ff66132fc2ad419b8611fa4499dd5249"
-        },
-        {
-            "m_Id": "9a3d53dde03b44cd839038d8fa99a133"
         },
         {
             "m_Id": "92eb8a0920c3446598f01f85ee4125aa"

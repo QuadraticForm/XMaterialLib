@@ -168,16 +168,153 @@ void XRefLitModelAddlLights_half(
 }
 
 //
-// Ext Lit
-// 按照一些特殊材质的需求，在 Lit 材质的基础上进行一些扩展
+// Refraction Specular
 //
 
 
-//
-// Crystal，水晶材质
-//
+void XRefractionSpecular_float(
+    float3 F0, float Smoothness, float TrickOffset,
+    float3 WorldPos, float3 WorldNormal, float3 WorldView,
+    float3 LightDir, float3 LightColor, float LightAtten,
+    out float3 Result)
+{
+    Result = 0;
+    
+#ifndef SHADERGRAPH_PREVIEW
+    
+    // xx: trick to only consider when light is "behind" surface
+    F0 *= saturate(-dot(LightDir, WorldNormal) * 10);
+    
+    // xx: trick to refract light 
+    LightDir = refract(LightDir, WorldNormal, 1 + TrickOffset);
+    
+    // xx: trick to use normal specular function as refraction specular
+    LightDir = reflect(LightDir, WorldNormal);
+   
+    // TODO, make this PBR
+    float NDotL = saturate(dot(WorldNormal, LightDir));
+    float3 irradiance = LightColor * LightAtten * NDotL;
+	
+    float3 brdf = F0 * XSpecular(WorldNormal, LightDir, WorldView, Smoothness);
+    
+    Result = brdf * irradiance;
+    
+#endif
+}
+
+void XRefractionSpecular_half(
+    half3 F0, half Smoothness, half TrickOffset,
+    half3 WorldPos, half3 WorldNormal, half3 WorldView,
+    half3 LightDir, half3 LightColor, half LightAtten,
+    out half3 Result)
+{
+    Result = 0;
+    
+#ifndef SHADERGRAPH_PREVIEW
+    
+    // xx: trick to only consider when light is "behind" surface
+    F0 *= saturate(-dot(LightDir, WorldNormal) * 10);
+    
+    // xx: trick to refract light 
+    LightDir = refract(LightDir, WorldNormal, 1 + TrickOffset);
+    
+    // xx: trick to use normal specular function as refraction specular
+    LightDir = reflect(LightDir, WorldNormal);
+   
+    // TODO, make this PBR
+    half NDotL = saturate(dot(WorldNormal, LightDir));
+    half3 irradiance = LightColor * LightAtten * NDotL;
+	
+    half3 brdf = F0 * XSpecular(WorldNormal, LightDir, WorldView, Smoothness);
+    
+    Result = brdf * irradiance;
+    
+#endif
+}
 
 
+void XRefractionSpecularAddlLights_float(
+    float3 F0, float Smoothness, float TrickOffset,
+    float3 WorldPos, float3 WorldNormal, float3 WorldView,
+    out float3 Result)
+{
+    Result = 0;
 
+#ifndef SHADERGRAPH_PREVIEW
+    
+    uint pixelLightCount = GetAdditionalLightsCount();
+
+#if USE_FORWARD_PLUS
+    // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
+    InputData inputData = (InputData)0;
+    float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+    inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
+    inputData.positionWS = WorldPosition;
+#endif
+
+    LIGHT_LOOP_BEGIN(pixelLightCount)
+
+    Light light = XGetAddlLight(lightIndex, WorldPos);
+    
+    float3 thisLightResult = 0;
+    
+#if defined(_LIGHT_COOKIES)
+        float3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);
+        light.color *= cookieColor;
+#endif
+    
+    XRefractionSpecular_float(F0, Smoothness, TrickOffset,
+                        WorldPos, WorldNormal, WorldView,
+                        light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
+                        thisLightResult);
+    
+    Result += thisLightResult;
+	
+    LIGHT_LOOP_END
+
+#endif
+}
+
+void XRefractionSpecularAddlLights_half(
+    half3 F0, half Smoothness, half TrickOffset,
+    half3 WorldPos, half3 WorldNormal, half3 WorldView,
+    out half3 Result)
+{
+    Result = 0;
+
+#ifndef SHADERGRAPH_PREVIEW
+    
+    uint pixelLightCount = GetAdditionalLightsCount();
+
+#if USE_FORWARD_PLUS
+    // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
+    InputData inputData = (InputData)0;
+    half4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+    inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
+    inputData.positionWS = WorldPosition;
+#endif
+
+    LIGHT_LOOP_BEGIN(pixelLightCount)
+
+    Light light = XGetAddlLight(lightIndex, WorldPos);
+    
+    half3 thisLightResult = 0;
+    
+#if defined(_LIGHT_COOKIES)
+        half3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);
+        light.color *= cookieColor;
+#endif
+    
+    XRefractionSpecular_half(F0, Smoothness, TrickOffset,
+                        WorldPos, WorldNormal, WorldView,
+                        light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
+                        thisLightResult);
+    
+    Result += thisLightResult;
+	
+    LIGHT_LOOP_END
+
+#endif
+}
 
 #endif
