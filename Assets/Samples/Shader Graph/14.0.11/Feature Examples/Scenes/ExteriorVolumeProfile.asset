@@ -409,20 +409,7 @@ MonoBehaviour:
   m_Name: ExteriorVolumeProfile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -8075041343399620118}
-  - {fileID: 5580338249648076752}
-  - {fileID: 6508213727735904763}
-  - {fileID: 7879906963843830384}
-  - {fileID: -8067166546897044546}
-  - {fileID: 3884085445312726101}
-  - {fileID: 1469905032442258176}
-  - {fileID: 4624770114631576748}
-  - {fileID: 254486641261711594}
-  - {fileID: -6975776770395274358}
-  - {fileID: 1918416040923684496}
-  - {fileID: -5853923668859720466}
-  - {fileID: 4302018370519120706}
-  - {fileID: -3552054655843743451}
+  - {fileID: 4007463552064387978}
 --- !u!114 &254486641261711594
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -630,6 +617,46 @@ MonoBehaviour:
   fallbackMode:
     m_OverrideState: 0
     m_Value: 1
+  hueShiftAmount:
+    m_OverrideState: 0
+    m_Value: 0
+  detectPaperWhite:
+    m_OverrideState: 0
+    m_Value: 0
+  paperWhite:
+    m_OverrideState: 0
+    m_Value: 300
+  detectBrightnessLimits:
+    m_OverrideState: 0
+    m_Value: 1
+  minNits:
+    m_OverrideState: 0
+    m_Value: 0.005
+  maxNits:
+    m_OverrideState: 0
+    m_Value: 1000
+--- !u!114 &4007463552064387978
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 1
+    m_Value: 0
+  neutralHDRRangeReductionMode:
+    m_OverrideState: 0
+    m_Value: 2
+  acesPreset:
+    m_OverrideState: 0
+    m_Value: 3
   hueShiftAmount:
     m_OverrideState: 0
     m_Value: 0
