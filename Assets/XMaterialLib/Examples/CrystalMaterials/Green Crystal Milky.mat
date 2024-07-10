@@ -25,7 +25,8 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - REQUIRE_OPAQUE_TEXTURE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -103,6 +104,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - REQUIRE_OPAQUE_TEXTURE: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -126,11 +128,12 @@ Material:
     - _FFR_Pow: 1
     - _FRS: 1
     - _FRS_Offset: 0
+    - _FTIR: 1
     - _FTIR_Absorption: 10
-    - _FTIR_Edge_Offset: -0.99
+    - _FTIR_Edge_Offset: -0.878
     - _FTIR_Edge_Pow: 2
     - _FTIR_Edge_Softness: 1
-    - _FTT_Pow: 2
+    - _FTT_Pow: 2.88
     - _Float: 0.95
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -142,6 +145,7 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _REQUIRE_OPAQUE_TEXTURE: 0
     - _ReceiveShadows: 1
     - _RefractionOffset: 1
     - _Refraction_Offset: 1
@@ -157,8 +161,8 @@ Material:
     - _Transmission: 1
     - _TransmissionAbsorption: 2
     - _TransmissionSmoothness: 0
-    - _Transmission_Absorption: 5
-    - _Transmission_Smoothness: 0.885
+    - _Transmission_Absorption: 2
+    - _Transmission_Smoothness: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

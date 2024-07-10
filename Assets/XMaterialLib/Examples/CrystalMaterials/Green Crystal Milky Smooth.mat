@@ -25,7 +25,8 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - REQUIRE_OPAQUE_TEXTURE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -103,6 +104,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - REQUIRE_OPAQUE_TEXTURE: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -143,9 +145,10 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _REQUIRE_OPAQUE_TEXTURE: 0
     - _ReceiveShadows: 1
     - _RefractionOffset: 1
-    - _Refraction_Offset: 1
+    - _Refraction_Offset: 0.25
     - _Smoothness: 0.761
     - _SmoothnessTextureChannel: 0
     - _Specular: 1
