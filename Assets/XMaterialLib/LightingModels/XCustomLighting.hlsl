@@ -41,7 +41,7 @@ half3 XSpecular(half3 normal, half3 lightDir, half3 viewDir, half smoothness)
 //
 
 void XRefLitModel_float(
-    float3 BaseColor, float3 DiffuseColor, float3 F0, float Smoothness,
+    float3 DiffuseColor, float3 F0, float Smoothness,
     float3 WorldPos, float3 WorldNormal, float3 WorldView,
     float3 LightDir, float3 LightColor, float LightAtten,
     out float3 Result)
@@ -63,7 +63,7 @@ void XRefLitModel_float(
 }
 
 void XRefLitModel_half(
-    half3 BaseColor, half3 DiffuseColor, half3 F0, half Smoothness,
+    half3 DiffuseColor, half3 F0, half Smoothness,
     half3 WorldPos, half3 WorldNormal, half3 WorldView,
     half3 LightDir, half3 LightColor, half LightAtten,
     out half3 Result)
@@ -84,7 +84,7 @@ void XRefLitModel_half(
 
 
 void XRefLitModelAddlLights_float(
-    float3 BaseColor, float3 DiffuseColor, float3 F0, float Smoothness,
+    float3 DiffuseColor, float3 F0, float Smoothness,
     float3 WorldPos, float3 WorldNormal, float3 WorldView,
     out float3 Result)
 {
@@ -113,7 +113,7 @@ void XRefLitModelAddlLights_float(
         light.color *= cookieColor;
     #endif
     
-	XRefLitModel_float(BaseColor, DiffuseColor, F0, Smoothness,
+	XRefLitModel_float(DiffuseColor, F0, Smoothness,
                         WorldPos, WorldNormal, WorldView,
                         light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
                         thisLightResult);
@@ -126,7 +126,7 @@ void XRefLitModelAddlLights_float(
 }
 
 void XRefLitModelAddlLights_half(
-    half3 BaseColor, half3 DiffuseColor, half3 F0, half Smoothness,
+    half3 DiffuseColor, half3 F0, half Smoothness,
     half3 WorldPos, half3 WorldNormal, half3 WorldView,
     out half3 Result)
 {
@@ -155,7 +155,7 @@ void XRefLitModelAddlLights_half(
         light.color *= cookieColor;
 #endif
     
-	XRefLitModel_half(BaseColor, DiffuseColor, F0, Smoothness,
+	XRefLitModel_half(DiffuseColor, F0, Smoothness,
                         WorldPos, WorldNormal, WorldView,
                         light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
                         thisLightResult);

@@ -126,7 +126,7 @@ Material:
     - _FFR_Edge_Pow: 1
     - _FFR_Edge_Softness: 0.1
     - _FFR_Pow: 1
-    - _FRS: 0
+    - _FRS: 1
     - _FRS_Offset: 0.4
     - _FTIR: 1
     - _FTIR_Absorption: 10
