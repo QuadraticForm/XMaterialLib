@@ -4,7 +4,7 @@
 #ifndef SHADERGRAPH_PREVIEW
 
 // This function gets additional light data and calculates realtime shadows
-Light XGetAddlLight(int pixelLightIndex, float3 worldPosition) {
+Light XGetAddlLight(int pixelLightIndex, float3 WorldPos) {
     // Convert the pixel light index to the light data index
     #if USE_FORWARD_PLUS
         int lightIndex = pixelLightIndex;
@@ -12,9 +12,9 @@ Light XGetAddlLight(int pixelLightIndex, float3 worldPosition) {
         int lightIndex = GetPerObjectLightIndex(pixelLightIndex);
     #endif
     // Call the URP additional light algorithm. This will not calculate shadows, since we don't pass a shadow mask value
-    Light light = GetAdditionalPerObjectLight(lightIndex, worldPosition);
+    Light light = GetAdditionalPerObjectLight(lightIndex, WorldPos);
     // Manually set the shadow attenuation by calculating realtime shadows
-    light.shadowAttenuation = AdditionalLightRealtimeShadow(lightIndex, worldPosition, light.direction);
+    light.shadowAttenuation = AdditionalLightRealtimeShadow(lightIndex, WorldPos, light.direction);
     return light;
 }
 
@@ -97,9 +97,9 @@ void XRefLitModelAddlLights_float(
 #if USE_FORWARD_PLUS
     // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
     InputData inputData = (InputData)0;
-    float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+    float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPos));
     inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
-    inputData.positionWS = WorldPosition;
+    inputData.positionWS = WorldPos;
 #endif
 
 	LIGHT_LOOP_BEGIN(pixelLightCount)
@@ -109,7 +109,7 @@ void XRefLitModelAddlLights_float(
     float3 thisLightResult = 0;
     
     #if defined(_LIGHT_COOKIES)
-        float3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);
+        float3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPos);
         light.color *= cookieColor;
     #endif
     
@@ -139,9 +139,9 @@ void XRefLitModelAddlLights_half(
 #if USE_FORWARD_PLUS
     // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
     InputData inputData = (InputData)0;
-    half4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+    half4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPos));
     inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
-    inputData.positionWS = WorldPosition;
+    inputData.positionWS = WorldPos;
 #endif
 
 	LIGHT_LOOP_BEGIN(pixelLightCount)
@@ -151,7 +151,7 @@ void XRefLitModelAddlLights_half(
 	half3 thisLightResult = 0;
     
 #if defined(_LIGHT_COOKIES)
-        half3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);
+        half3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPos);
         light.color *= cookieColor;
 #endif
     
@@ -173,7 +173,7 @@ void XRefLitModelAddlLights_half(
 
 
 void XRefractionSpecular_float(
-    float3 F0, float Smoothness, float TrickOffset,
+    float3 F0, float Smoothness,
     float3 WorldPos, float3 WorldNormal, float3 WorldView,
     float3 LightDir, float3 LightColor, float LightAtten,
     out float3 Result)
@@ -185,11 +185,9 @@ void XRefractionSpecular_float(
     // xx: trick to only consider when light is "behind" surface
     F0 *= saturate(-dot(LightDir, WorldNormal) * 10);
     
-    // xx: trick to refract light 
-    LightDir = refract(LightDir, WorldNormal, 1 + TrickOffset);
-    
     // xx: trick to use normal specular function as refraction specular
-    LightDir = reflect(LightDir, WorldNormal);
+	WorldNormal = -WorldNormal;
+	WorldView = reflect(WorldView, WorldNormal);
    
     // TODO, make this PBR
     float NDotL = saturate(dot(WorldNormal, LightDir));
@@ -203,7 +201,7 @@ void XRefractionSpecular_float(
 }
 
 void XRefractionSpecular_half(
-    half3 F0, half Smoothness, half TrickOffset,
+    half3 F0, half Smoothness,
     half3 WorldPos, half3 WorldNormal, half3 WorldView,
     half3 LightDir, half3 LightColor, half LightAtten,
     out half3 Result)
@@ -213,13 +211,11 @@ void XRefractionSpecular_half(
 #ifndef SHADERGRAPH_PREVIEW
     
     // xx: trick to only consider when light is "behind" surface
-    F0 *= saturate(-dot(LightDir, WorldNormal) * 10);
-    
-    // xx: trick to refract light 
-    LightDir = refract(LightDir, WorldNormal, 1 + TrickOffset);
+	F0 *= saturate(-dot(LightDir, WorldNormal) * 10);
     
     // xx: trick to use normal specular function as refraction specular
-    LightDir = reflect(LightDir, WorldNormal);
+	WorldNormal = -WorldNormal;
+	WorldView = reflect(WorldView, WorldNormal);
    
     // TODO, make this PBR
     half NDotL = saturate(dot(WorldNormal, LightDir));
@@ -234,7 +230,7 @@ void XRefractionSpecular_half(
 
 
 void XRefractionSpecularAddlLights_float(
-    float3 F0, float Smoothness, float TrickOffset,
+    float3 F0, float Smoothness,
     float3 WorldPos, float3 WorldNormal, float3 WorldView,
     out float3 Result)
 {
@@ -247,9 +243,9 @@ void XRefractionSpecularAddlLights_float(
 #if USE_FORWARD_PLUS
     // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
     InputData inputData = (InputData)0;
-    float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+    float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPos));
     inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
-    inputData.positionWS = WorldPosition;
+    inputData.positionWS = WorldPos;
 #endif
 
     LIGHT_LOOP_BEGIN(pixelLightCount)
@@ -259,11 +255,11 @@ void XRefractionSpecularAddlLights_float(
     float3 thisLightResult = 0;
     
 #if defined(_LIGHT_COOKIES)
-        float3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);
+        float3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPos);
         light.color *= cookieColor;
 #endif
     
-    XRefractionSpecular_float(F0, Smoothness, TrickOffset,
+    XRefractionSpecular_float(F0, Smoothness,
                         WorldPos, WorldNormal, WorldView,
                         light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
                         thisLightResult);
@@ -276,7 +272,7 @@ void XRefractionSpecularAddlLights_float(
 }
 
 void XRefractionSpecularAddlLights_half(
-    half3 F0, half Smoothness, half TrickOffset,
+    half3 F0, half Smoothness,
     half3 WorldPos, half3 WorldNormal, half3 WorldView,
     out half3 Result)
 {
@@ -289,9 +285,9 @@ void XRefractionSpecularAddlLights_half(
 #if USE_FORWARD_PLUS
     // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
     InputData inputData = (InputData)0;
-    half4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+    half4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPos));
     inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
-    inputData.positionWS = WorldPosition;
+    inputData.positionWS = WorldPos;
 #endif
 
     LIGHT_LOOP_BEGIN(pixelLightCount)
@@ -301,11 +297,11 @@ void XRefractionSpecularAddlLights_half(
     half3 thisLightResult = 0;
     
 #if defined(_LIGHT_COOKIES)
-        half3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);
+        half3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPos);
         light.color *= cookieColor;
 #endif
     
-    XRefractionSpecular_half(F0, Smoothness, TrickOffset,
+    XRefractionSpecular_half(F0, Smoothness,
                         WorldPos, WorldNormal, WorldView,
                         light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
                         thisLightResult);
@@ -313,6 +309,145 @@ void XRefractionSpecularAddlLights_half(
     Result += thisLightResult;
 	
     LIGHT_LOOP_END
+
+#endif
+}
+
+
+// 
+// scattering
+//
+
+// FT Means Fake Thickness
+void XScattering_float(
+    float3 FTNormal, 
+    float3 AbsorptionColor, float AbsorptionRate,
+    float3 WorldPos, float3 WorldNormal, float3 WorldView,
+    float3 LightDir, float3 LightColor, float LightAtten,
+    out float3 Result)
+{
+	Result = 0;
+    
+#ifndef SHADERGRAPH_PREVIEW
+
+    // Fake Thickness Dot
+    
+	float thickness = saturate(-dot(FTNormal, LightDir) * 0.5f + 0.5);
+    
+	float3 absorption = pow(AbsorptionColor, max(AbsorptionRate * thickness, 0.001)); // thickness 就是光行进的距离，也就是 distance
+    
+	Result = LightColor * LightAtten * absorption;
+    
+#endif
+}
+
+void XScattering_half(
+    half3 FTNormal,
+    half3 AbsorptionColor, half AbsorptionRate,
+    half3 WorldPos, half3 WorldNormal, half3 WorldView,
+    half3 LightDir, half3 LightColor, half LightAtten,
+    out half3 Result)
+{
+	Result = 0;
+    
+#ifndef SHADERGRAPH_PREVIEW
+
+    // Fake Thickness Dot
+    
+	half thickness = saturate(-dot(FTNormal, LightDir) * 0.5f + 0.5);
+    
+	half3 absorption = pow(AbsorptionColor, max(AbsorptionRate * thickness, 0.001)); // thickness 就是光行进的距离，也就是 distance
+    
+	Result = LightColor * LightAtten * absorption;
+    
+#endif
+}
+
+
+void XScatteringAddlLights_float(
+    float3 FTNormal,
+    float3 AbsorptionColor, half AbsorptionRate,
+    float3 WorldPos, float3 WorldNormal, float3 WorldView,
+    out float3 Result)
+{
+	Result = 0;
+
+#ifndef SHADERGRAPH_PREVIEW
+    
+	uint pixelLightCount = GetAdditionalLightsCount();
+
+#if USE_FORWARD_PLUS
+    // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
+    InputData inputData = (InputData)0;
+    float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPos));
+    inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
+    inputData.positionWS = WorldPos;
+#endif
+
+	LIGHT_LOOP_BEGIN(pixelLightCount)
+
+	Light light = XGetAddlLight(lightIndex, WorldPos);
+    
+	float3 thisLightResult = 0;
+    
+#if defined(_LIGHT_COOKIES)
+        float3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPos);
+        light.color *= cookieColor;
+#endif
+    
+	XScattering_float(FTNormal,
+                        AbsorptionColor, AbsorptionRate, 
+                        WorldPos, WorldNormal, WorldView,
+                        light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
+                        thisLightResult);
+    
+	Result += thisLightResult;
+	
+	LIGHT_LOOP_END
+
+#endif
+}
+
+void XScatteringAddlLights_half(
+    half3 FTNormal,
+    half3 AbsorptionColor, half AbsorptionRate,
+    half3 WorldPos, half3 WorldNormal, half3 WorldView,
+    out half3 Result)
+{
+	Result = 0;
+
+#ifndef SHADERGRAPH_PREVIEW
+    
+	uint pixelLightCount = GetAdditionalLightsCount();
+
+#if USE_FORWARD_PLUS
+    // for Foward+ LIGHT_LOOP_BEGIN macro uses inputData.normalizedScreenSpaceUV and inputData.positionWS
+    InputData inputData = (InputData)0;
+    half4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPos));
+    inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
+    inputData.positionWS = WorldPos;
+#endif
+
+	LIGHT_LOOP_BEGIN(pixelLightCount)
+
+	Light light = XGetAddlLight(lightIndex, WorldPos);
+    
+	half3 thisLightResult = 0;
+    
+#if defined(_LIGHT_COOKIES)
+        half3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPos);
+        light.color *= cookieColor;
+#endif
+    
+	XScattering_half(FTNormal,
+                        AbsorptionColor, AbsorptionRate,
+                        WorldPos, WorldNormal, WorldView,
+                        light.direction, light.color, light.shadowAttenuation * light.distanceAttenuation,
+                        thisLightResult);
+    
+	Result += thisLightResult;
+	
+	LIGHT_LOOP_END
 
 #endif
 }
