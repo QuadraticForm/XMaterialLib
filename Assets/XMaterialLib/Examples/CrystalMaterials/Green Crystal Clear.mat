@@ -25,9 +25,9 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - REQUIRE_OPAQUE_TEXTURE
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -172,7 +172,7 @@ Material:
     - _GlossyReflections: 0
     - _IOR: 1.5
     - _Metallic: 0
-    - _Normal_Affect_Transmission: 1
+    - _Normal_Affect_Transmission: 1.13
     - _Normal_Strength: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -181,7 +181,7 @@ Material:
     - _REQUIRE_OPAQUE_TEXTURE: 0
     - _ReceiveShadows: 1
     - _RefractionOffset: 1
-    - _Refraction_Offset: 2
+    - _Refraction_Offset: 1.5
     - _Scattering: 0.05
     - _Scattering_Absorption_Rate: 10
     - _Smoothness: 0.859
@@ -192,15 +192,16 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _TCS_Probe: 1
     - _TCS_Probe_TODO: 0
-    - _TCS_Scene_Color: 1
+    - _TCS_Scene_Color: 0.67
     - _TFT_Pow: 2.05
     - _TNT_Strength: 0
     - _Transmission: 1
     - _TransmissionAbsorption: 2
     - _TransmissionSmoothness: 0.92
     - _Transmission_Absorption: 3.86
-    - _Transmission_Smoothness: 1
+    - _Transmission_Smoothness: 0.644
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

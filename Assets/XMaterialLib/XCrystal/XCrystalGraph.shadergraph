@@ -429,6 +429,9 @@
         },
         {
             "m_Id": "b41eebf0abc0490d8fbfa07de8944ec6"
+        },
+        {
+            "m_Id": "8971bcd8d30d413381384a6ab2b49092"
         }
     ],
     "m_GroupDatas": [
@@ -1072,6 +1075,20 @@
                     "m_Id": "ea4875d90cbb4acf896219e52bd9f36d"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "8971bcd8d30d413381384a6ab2b49092"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "2e229dd1e1274603b99ece8aa7ccb158"
+                },
+                "m_SlotId": 301150157
             }
         },
         {
@@ -1722,10 +1739,10 @@
     "m_Guid": {
         "m_GuidSerialized": "af9a88b4-2189-4c26-87bb-348c515d57d5"
     },
-    "m_Name": "TCS Probe (TODO)",
+    "m_Name": "TCS Probe",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "TCS Probe (TODO)",
-    "m_DefaultReferenceName": "_TCS_Probe_TODO",
+    "m_RefNameGeneratedByDisplayName": "TCS Probe",
+    "m_DefaultReferenceName": "_TCS_Probe",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2631,10 +2648,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 716.0,
-            "y": 927.3333740234375,
-            "width": 160.00006103515626,
-            "height": 36.0
+            "x": 715.4999389648438,
+            "y": 959.4999389648438,
+            "width": 159.00006103515626,
+            "height": 33.99993896484375
         }
     },
     "m_Slots": [
@@ -2827,10 +2844,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 652.0,
-            "y": 1038.666748046875,
-            "width": 223.3333740234375,
-            "height": 36.0
+            "x": 651.4999389648438,
+            "y": 1070.5,
+            "width": 222.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -3490,6 +3507,9 @@
             "m_Id": "99eada2e6dc746afbcd5808c87b8927b"
         },
         {
+            "m_Id": "ed88ecb0a4804ec8923471e64d86324b"
+        },
+        {
             "m_Id": "a8e58e3c11bb400fa3472a6a3677cba2"
         },
         {
@@ -3569,7 +3589,8 @@
         "d0b321ba-305e-4e11-b0b6-c6e58a3d4afd",
         "552b69c1-a0a8-48f0-a3e6-212d2670c183",
         "4ca4eb44-a09e-4d11-9dc1-d9d4fe1e64aa",
-        "0cf3ca4c-20e4-4e93-bbd2-b98398fb1e10"
+        "0cf3ca4c-20e4-4e93-bbd2-b98398fb1e10",
+        "1c9a45e2-cf53-4207-9f36-5f33e393317c"
     ],
     "m_PropertyIds": [
         2113222200,
@@ -3599,7 +3620,8 @@
         -2043766050,
         -1287954452,
         2131268793,
-        -775437429
+        -775437429,
+        301150157
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -3933,6 +3955,21 @@
     },
     "m_Labels": [],
     "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "3d88ddf02842409a873e67ee4ae108bd",
+    "m_Id": 0,
+    "m_DisplayName": "TCS Probe",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -5180,10 +5217,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 742.666748046875,
-            "y": 747.333251953125,
-            "width": 132.6666259765625,
-            "height": 36.00006103515625
+            "x": 742.0,
+            "y": 779.4999389648438,
+            "width": 131.49993896484376,
+            "height": 33.99993896484375
         }
     },
     "m_Slots": [
@@ -5376,10 +5413,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 720.0,
-            "y": 891.3333129882813,
-            "width": 155.3333740234375,
-            "height": 36.00006103515625
+            "x": 719.4999389648438,
+            "y": 923.4999389648438,
+            "width": 154.0,
+            "height": 34.00006103515625
         }
     },
     "m_Slots": [
@@ -6770,10 +6807,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 778.666748046875,
-            "y": 711.3333740234375,
-            "width": 97.33331298828125,
-            "height": 35.9998779296875
+            "x": 777.9999389648438,
+            "y": 743.4998779296875,
+            "width": 96.0,
+            "height": 34.0001220703125
         }
     },
     "m_Slots": [
@@ -6929,6 +6966,42 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "8971bcd8d30d413381384a6ab2b49092",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 742.0,
+            "y": 637.4999389648438,
+            "width": 131.49993896484376,
+            "height": 34.00006103515625
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "3d88ddf02842409a873e67ee4ae108bd"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "0572ff6ca6394c82afde4ec682a6be34"
     }
 }
 
@@ -7143,10 +7216,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 776.0,
-            "y": 783.3333129882813,
-            "width": 100.00006103515625,
-            "height": 36.0
+            "x": 775.4999389648438,
+            "y": 815.4999389648438,
+            "width": 99.00006103515625,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -7713,10 +7786,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 711.3333740234375,
-            "y": 1002.6666870117188,
-            "width": 163.33331298828126,
-            "height": 36.00006103515625
+            "x": 710.9999389648438,
+            "y": 1034.5,
+            "width": 162.0,
+            "height": 33.9998779296875
         }
     },
     "m_Slots": [
@@ -8962,10 +9035,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 710.6666870117188,
-            "y": 819.3333129882813,
-            "width": 165.3333740234375,
-            "height": 36.0
+            "x": 709.9999389648438,
+            "y": 851.5,
+            "width": 164.0,
+            "height": 33.99993896484375
         }
     },
     "m_Slots": [
@@ -9419,10 +9492,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 744.6666870117188,
-            "y": 966.6665649414063,
-            "width": 130.66668701171876,
-            "height": 36.0001220703125
+            "x": 744.0,
+            "y": 998.4999389648438,
+            "width": 128.99993896484376,
+            "height": 33.99993896484375
         }
     },
     "m_Slots": [
@@ -9803,10 +9876,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 658.0,
-            "y": 1074.666748046875,
-            "width": 217.3333740234375,
-            "height": 36.0
+            "x": 657.4999389648438,
+            "y": 1106.4998779296875,
+            "width": 216.0,
+            "height": 34.0001220703125
         }
     },
     "m_Slots": [
@@ -10178,6 +10251,21 @@
         "x": -1.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "ed88ecb0a4804ec8923471e64d86324b",
+    "m_Id": 301150157,
+    "m_DisplayName": "TCS Probe",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_TCS_Probe",
+    "m_StageCapability": 2,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -10736,10 +10824,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 752.6666870117188,
-            "y": 639.3333129882813,
-            "width": 122.66668701171875,
-            "height": 36.00006103515625
+            "x": 751.9999389648438,
+            "y": 671.5,
+            "width": 121.5,
+            "height": 33.99993896484375
         }
     },
     "m_Slots": [
@@ -10800,10 +10888,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 697.3333129882813,
-            "y": 855.3333129882813,
-            "width": 178.666748046875,
-            "height": 36.0
+            "x": 697.0,
+            "y": 887.4998779296875,
+            "width": 177.5,
+            "height": 34.0001220703125
         }
     },
     "m_Slots": [
@@ -10871,10 +10959,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 690.6666870117188,
-            "y": 675.3333740234375,
-            "width": 185.3333740234375,
-            "height": 36.0
+            "x": 689.9999389648438,
+            "y": 707.5,
+            "width": 184.0,
+            "height": 33.99993896484375
         }
     },
     "m_Slots": [
