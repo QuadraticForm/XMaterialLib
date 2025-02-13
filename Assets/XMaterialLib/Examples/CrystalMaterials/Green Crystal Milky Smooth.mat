@@ -195,7 +195,7 @@ Material:
     - _TransmissionAbsorption: 2
     - _TransmissionSmoothness: 0
     - _Transmission_Absorption: 5
-    - _Transmission_Smoothness: 0.485
+    - _Transmission_Smoothness: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

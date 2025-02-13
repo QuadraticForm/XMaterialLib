@@ -1379,7 +1379,7 @@
     "m_Group": {
         "m_Id": "b777094d5a5742abb4db7f4a08a43dcf"
     },
-    "m_Name": "XF0",
+    "m_Name": "XCalcF0",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -2321,7 +2321,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "XDiffuseColor",
+    "m_Name": "XCalcDiffuseColor",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
